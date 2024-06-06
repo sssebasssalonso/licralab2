@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sopa de Letras</title>
+    <style>
+        body {
+            font-size: 20px; /* Increase the base font size */
+            text-align: center; /* Center the content */
+        }
+        table {
+            border: 2px solid #050430;
+            background-color: #e2dee1;
+            font-size: 24px; /* Increase the font size for table cells */
+            margin: 0 auto; /* Center the table */
+        }
+        th {
+            width: 50px;  /* Increase the width of the cells */
+            height: 50px; /* Increase the height of the cells */
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px; /* Increase the font size for the main heading */
+        }
+        h3 {
+            font-size: 28px; /* Increase the font size for subheadings */
+        }
+    </style>
+</head>
+<body>
+    <h1>Juega la sopa de Letras</h1>
+    <h3>Palabras a encontrar:</h3>
+    <ul>
+        <li>DANIEL</li>
+        <li>NOE</li>
+        <li>MOISES</li>
+        <li>JESUS</li>
+        <li>BIBLIA</li>
+    </ul>
+    <form id="espacio">
+        <table>
+            <tr>
+                <th id="celda1" onclick="comprobar1()">D</th>
+                <th id="celda2" onclick="comprobar2()">A</th>
+                <th id="celda3" onclick="comprobar3()">N</th>
+                <th id="celda4" onclick="comprobar4()">I</th>
+                <th id="celda5" onclick="comprobar5()">E</th>
+                <th id="celda6" onclick="comprobar6()">L</th>
+                <th>Z</th>
+                <th>O</th>
+                <th>V</th>
+                <th>D</th>
+                <th>Z</th>
+            </tr>
+            <tr>
+                <th>L</th>
+                <th>O</th>
+                <th>S</th>
+                <th>O</th>
+                <th>P</th>
+                <th>R</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>C</th>
+                <th>L</th>
+            </tr>
+            <tr>
+                <th id="celdaC1" onclick="comprobarC1()">M</th>
+                <th id="celdaC2" onclick="comprobarC2()">O</th>
+                <th id="celdaC3" onclick="comprobarC3()">I</th>
+                <th id="celdaC4" onclick="comprobarC4()">S</th>
+                <th id="celdaC5" onclick="comprobarC5()">E</th>
+                <th id="celdaC6" onclick="comprobarC6()">S</th>
+                <th>U</th>
+                <th>W</th>
+                <th>X</th>
+                <th>E</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <th>J</th>
+                <th>C</th>
+                <th>D</th>
+                <th>T</th>
+                <th>O</th>
+                <th id="celdaD6" onclick="comprobarD6()">J</th>
+                <th>F</th>
+                <th>L</th>
+                <th>O</th>
+                <th>H</th>
+                <th>I</th>
+            </tr>
+            <tr>
+                <th id="celdaE1" onclick="comprobarE1()">N</th>
+                <th id="celdaE2" onclick="comprobarE2()">O</th>
+                <th id="celdaE3" onclick="comprobarE3()">E</th>
+                <th>X</th>
+                <th>H</th>
+                <th>H</th>
+                <th>R</th>
+                <th>T</th>
+                <th>V</th>
+                <th>Z</th>
+                <th>M</th>
+            </tr>
+            <tr>
+                <th>Z</th>
+                <th>Q</th>
+                <th>M</th>
+                <th>X</th>
+                <th>H</th>
+                <th>H</th>
+                <th>R</th>
+                <th>T</th>
+                <th>V</th>
+                <th>Z</th>
+                <th>M</th>
+            </tr>
+            <tr>
+                <th id="celdaG1" onclick="comprobarG1()">J</th>
+                <th id="celdaG2" onclick="comprobarG2()">E</th>
+                <th id="celdaG3" onclick="comprobarG3()">S</th>
+                <th id="celdaG4" onclick="comprobarG4()">U</th>
+                <th id="celdaG5" onclick="comprobarG5()">S</th>
+                <th>L</th>
+                <th>L</th>
+                <th>O</th>
+                <th>R</th>
+                <th>T</th>
+                <th>I</th>
+            </tr>
+            <tr>
+                <th>T</th>
+                <th>B</th>
+                <th>E</th>
+                <th>O</th>
+                <th>K</th>
+                <th>K</th>
+                <th>I</th>
+                <th>Q</th>
+                <th>F</th>
+                <th>D</th>
+                <th>R</th>
+            </tr>
+            <tr>
+                <th>A</th>
+                <th>Q</th>
+                <th id="celdaI3" onclick="comprobarI3()">B</th>
+                <th id="celdaI4" onclick="comprobarI4()">I</th>
+                <th id="celdaI5" onclick="comprobarI5()">B</th>
+                <th id="celdaI6" onclick="comprobarI6()">L</th>
+                <th id="celdaI7" onclick="comprobarI7()">I</th>
+                <th id="celdaI8" onclick="comprobarI8()">A</th>
+                <th>Z</th>
+                <th>L</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <th>H</th>
+                <th>J</th>
+                <th>D</th>
+                <th>C</th>
+                <th>P</th>
+                <th>P</th>
+                <th>A</th>
+                <th>B</th>
+                <th>X</th>
+                <th>T</th>
+                <th>Z</th>
+            </tr>
+            <tr>
+                <th>I</th>
+                <th>Z</th>
+                <th>F</th>
+                <th>Q</th>
+                <th>B</th>
+                <th>O</th>
+                <th>M</th>
+                <th>D</th>
+                <th>X</th>
+                <th>U</th>
+                <th>S</th>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <footer><i>Has ganado</i></footer>
+    <script>
+        var a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,
+            b10, c6, c11, d6, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11,
+            f6, g6, h6, i3, i4, i5, i6, i7, i8, i9, j6;
+
+        function comprobar1() {
+            a1 = document.getElementById('celda1').style.color = "red";
+        }
+        function comprobar2() {
+            a2 = document.getElementById('celda2').style.color = "red";
+        }
+        function comprobar3() {
+            a3 = document.getElementById('celda3').style.color = "red";
+        }
+        function comprobar4() {
+            a4 = document.getElementById('celda4').style.color = "red";
+        }
+        function comprobar5() {
+            a5 = document.getElementById('celda5').style.color = "red";
+        }
+        function comprobar6() {
+            a6 = document.getElementById('celda6').style.color = "red";
+        }
+        function comprobar7() {
+            a7 = document.getElementById('celda7').style.color = "red";
+        }
+        function comprobar8() {
+            a8 = document.getElementById('celda8').style.color = "red";
+        }
+        function comprobar9() {
+            a9 = document.getElementById('celda9').style.color = "red";
+        }
+        function comprobar10() {
+            a10 = document.getElementById('celda10').style.color = "red";
+        }
+        function comprobarB10() {
+            b10 = document.getElementById('celdaB10').style.color = "blue";
+        }
+        function comprobarC1() {
+            c1 = document.getElementById('celdaC1').style.color = "brown";
+        }
+        function comprobarC2() {
+            c2 = document.getElementById('celdaC2').style.color = "brown";
+        }
+        function comprobarC3() {
+            c3 = document.getElementById('celdaC3').style.color = "brown";
+        }
+        function comprobarC4() {
+            c4 = document.getElementById('celdaC4').style.color = "brown";
+        }
+        function comprobarC5() {
+            c5 = document.getElementById('celdaC5').style.color = "brown";
+        }
+        function comprobarC6() {
+            c6 = document.getElementById('celdaC6').style.color = "brown";
+        }
+        function comprobarG1() {
+            g1 = document.getElementById('celdaG1').style.color = "green";
+        }
+        function comprobarG2() {
+            g2 = document.getElementById('celdaG2').style.color = "green";
+        }
+        function comprobarG3() {
+            g3 = document.getElementById('celdaG3').style.color = "green";
+        }
+        function comprobarG4() {
+            g4 = document.getElementById('celdaG4').style.color = "green";
+        }
+        function comprobarG5() {
+            g5 = document.getElementById('celdaG5').style.color = "green";
+        }
+        function comprobarH6() {
+            h6 = document.getElementById('celdaH6').style.color = "brown";
+        }
+        function comprobarI6() {
+            i6 = document.getElementById('celdaI6').style.color = "brown";
+        }
+        function comprobarJ6() {
+            j6 = document.getElementById('celdaJ6').style.color = "brown";
+        }
+        function comprobarE1() {
+            e1 = document.getElementById('celdaE1').style.color = "yellow";
+        }
+        function comprobarE2() {
+            e2 = document.getElementById('celdaE2').style.color = "yellow";
+        }
+        function comprobarE3() {
+            e3 = document.getElementById('celdaE3').style.color = "yellow";
+        }
+        function comprobarI3() {
+            i3 = document.getElementById('celdaI3').style.color = "orange";
+        }
+        function comprobarI4() {
+            i4 = document.getElementById('celdaI4').style.color = "orange";
+        }
+        function comprobarI5() {
+            i5 = document.getElementById('celdaI5').style.color = "orange";
+        }
+        function comprobarI6() {
+            i6 = document.getElementById('celdaI6').style.color = "orange";
+        }
+        function comprobarI7() {
+            i7 = document.getElementById('celdaI7').style.color = "orange";
+        }
+        function comprobarI8() {
+            i8 = document.getElementById('celdaI8').style.color = "orange";
+        }
+        function comprobarI9() {
+            i9 = document.getElementById('celdaI9').style.color = "orange";
+        }
+    </script>
+</body>
+</html>

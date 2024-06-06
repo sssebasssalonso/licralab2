@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda en Línea</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #ade8f4;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sección de productos */
+        .products-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1 1 calc(33.333% - 20px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+        }
+
+        .product-card button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background-color: #555;
+        }
+
+        /* Sección de carrito */
+        .cart-section {
+            padding: 60px 20px;
+            background-color: #fff;
+        }
+
+        .cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item button:hover {
+            background-color: #555;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 760px) {
+            .products-grid {
+                flex-direction: column;
+            }
+
+            .product-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#products">Productos</a></li>
+                <li><a href="#cart">Carrito</a></li>
+            </ul>
+        </nav>
+        <h1>Tienda en Línea</h1>
+    </header>
+
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2>Productos</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="uno.png" alt="Producto 1">
+                    <h3>Producto 1</h3>
+                    <p>Q100.00</p>
+                    <button onclick="addToCart('Producto 1', 100)">Agregar al Carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="dos.png" alt="Producto 2">
+                    <h3>Producto 2</h3>
+                    <p>Q75.00</p>
+                    <button onclick="addToCart('Producto 2', 75)">Agregar al Carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="tres.png" alt="Producto 3">
+                    <h3>Producto 3</h3>
+                    <p>Q50.00</p>
+                    <button onclick="addToCart('Producto 3', 50)">Agregar al Carrito</button>
+                </div>
+                <!-- Más productos aquí -->
+            </div>
+        </div>
+    </section>
+
+    <section id="cart" class="cart-section">
+        <div class="container">
+            <h2>Carrito</h2>
+            <ul class="cart-items" id="cart-items">
+                <!-- Los ítems del carrito aparecerán aquí -->
+            </ul>
+            <p>Total: Q<span id="total-price">0.00</span></p>
+        </div>
+    </section>
+
+    <script>
+        let cart = [];
+        let totalPrice = 0;
+
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            cartItemsContainer.innerHTML = '';
+            totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalPrice += item.price;
+                const cartItem = document.createElement('li');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    ${item.name} - Q${item.price.toFixed(2)}
+                    <button onclick="removeFromCart(${index})">Eliminar</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Palabras</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #ade8f4;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .letra {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #333;
+            margin: 5px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .pintar {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pintarError {
+            background-color: #F44336;
+            color: white;
+        }
+
+        #teclado {
+            margin-top: 20px;
+        }
+
+        #teclado button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #teclado button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Juego de Palabras</h1>
+    </header>
+    <div class="container">
+        <div id="palabra"></div>
+        <p>Intentos restantes: <span id="intentos">5</span></p>
+        <p>Ayuda: <span id="ayuda"></span></p>
+        <p>Letras ingresadas: <span id="letrasIngresadas"></span></p>
+        <div id="teclado"></div>
+    </div>
+
+    <script>
+        let arrayPalabras = ["JESUS", "DANIEL", "MOISES", "ARCA", "DILUVIO", "NOE"];
+        let ayudas = ["Salvador del mundo", "Profeta que interpretó sueños", "Líder del éxodo", "Barco grande", "Gran inundación", "Construyó el arca"];
+        let cantPalabrasJugadas = 0;
+        let intentosRestantes = 5;
+        let posActual;
+        let arrayPalabraActual = [];
+        let cantidadAcertadas = 0;
+        let divsPalabraActual = [];
+        let totalQueDebeAcertar;
+
+        function cargarNuevaPalabra() {
+            cantPalabrasJugadas++;
+            if (cantPalabrasJugadas > 6) {
+                arrayPalabras = ["JESUS", "DANIEL", "MOISES", "ARCA", "DILUVIO", "NOE"];
+                ayudas = ["Salvador del mundo", "Profeta que interpretó sueños", "Líder del éxodo", "Barco grande", "Gran inundación", "Construyó el arca"];
+                cantPalabrasJugadas = 1; // Restablecer la cuenta
+            }
+
+            posActual = Math.floor(Math.random() * arrayPalabras.length);
+            let palabra = arrayPalabras[posActual];
+            totalQueDebeAcertar = palabra.length;
+            cantidadAcertadas = 0;
+            arrayPalabraActual = palabra.split('');
+
+            document.getElementById("palabra").innerHTML = "";
+            document.getElementById("letrasIngresadas").innerHTML = "";
+            document.getElementById("teclado").innerHTML = "";
+
+            for (let i = 0; i < palabra.length; i++) {
+                let divLetra = document.createElement("div");
+                divLetra.className = "letra";
+                document.getElementById("palabra").appendChild(divLetra);
+            }
+
+            divsPalabraActual = document.getElementsByClassName("letra");
+            intentosRestantes = 5;
+            document.getElementById("intentos").innerHTML = intentosRestantes;
+            document.getElementById("ayuda").innerHTML = ayudas[posActual];
+
+            arrayPalabras.splice(posActual, 1);
+            ayudas.splice(posActual, 1);
+
+            crearTeclado();
+        }
+
+        function crearTeclado() {
+            const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            const tecladoContainer = document.getElementById('teclado');
+
+            letras.forEach(letra => {
+                let boton = document.createElement('button');
+                boton.innerHTML = letra;
+                boton.onclick = () => manejarLetraIngresada(letra);
+                tecladoContainer.appendChild(boton);
+            });
+        }
+
+        function manejarLetraIngresada(letra) {
+            let letrasIngresadas = document.getElementById("letrasIngresadas").innerHTML.split(' - ').filter(Boolean);
+
+            if (letrasIngresadas.indexOf(letra) === -1) {
+                let acerto = false;
+
+                for (let i = 0; i < arrayPalabraActual.length; i++) {
+                    if (arrayPalabraActual[i] === letra) {
+                        divsPalabraActual[i].innerHTML = letra;
+                        acerto = true;
+                        cantidadAcertadas++;
+                    }
+                }
+
+                if (acerto) {
+                    if (totalQueDebeAcertar === cantidadAcertadas) {
+                        for (let i = 0; i < arrayPalabraActual.length; i++) {
+                            divsPalabraActual[i].className = "letra pintar";
+                        }
+                    }
+                } else {
+                    intentosRestantes--;
+                    document.getElementById("intentos").innerHTML = intentosRestantes;
+
+                    if (intentosRestantes <= 0) {
+                        for (let i = 0; i < arrayPalabraActual.length; i++) {
+                            divsPalabraActual[i].className = "letra pintarError";
+                        }
+                    }
+                }
+
+                document.getElementById("letrasIngresadas").innerHTML += letra + " - ";
+                document.querySelector(`button:contains(${letra})`).disabled = true;
+            }
+        }
+
+        cargarNuevaPalabra();
+
+        function isLetter(str) {
+            return str.length === 1 && str.match(/[a-z]/i);
+        }
+    </script>
+</body>
+</html>
